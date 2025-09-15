@@ -123,27 +123,25 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
             >
-              <Link href="/crop-recommendation">
-                <MotionDiv whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }} className="relative group">
-                  <Button
-                    size="lg"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-                  >
-                    <MotionDiv
-                      className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={false}
-                    />
-                    <span className="relative z-10 flex items-center gap-2">
-                      <Sprout className="w-5 h-5" />
-                      Get Started
-                    </span>
-                  </Button>
-                </MotionDiv>
-              </Link>
+              <MotionDiv whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }} className="relative group">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                >
+                  <MotionDiv
+                    className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={false}
+                  />
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Sprout className="w-5 h-5" />
+                    Get Started
+                  </span>
+                </Button>
+              </MotionDiv>
 
               <MotionDiv whileHover={{ scale: 1.02 }} className="text-muted-foreground text-lg">
                 <span className="flex items-center gap-2">
-                  <Droplets className="w-5 h-5 text-primary" />
+                  <Droplets className="w-5 h-5" />
                   Free to use • No signup required
                 </span>
               </MotionDiv>

@@ -12,7 +12,7 @@ export function Navigation() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/crop-recommendation", label: "Features" },
+    { href: "/features", label: "Features" },
     { href: "/about", label: "About Us" },
     { href: "/contact", label: "Contact" },
   ]
