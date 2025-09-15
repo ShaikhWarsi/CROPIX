@@ -13,8 +13,8 @@ import { Github, Linkedin, Instagram } from "lucide-react";
 const teamMembers = [
   {
     name: "Rachit Tiwari",
-    role: "Lead Developer",
-    bio: "Passionate about AI and its applications in agriculture. Rachit leads the development of Cropix's core features.",
+    role: "Team Lead",
+    bio: "Guides the development of Cropix's core features, leveraging his passion for AI in agriculture.",
     social: {
       github: "https://github.com/rachittiwari",
       linkedin: "https://www.linkedin.com/in/rachittiwari",
@@ -23,8 +23,8 @@ const teamMembers = [
   },
   {
     name: "Shaikh Mohammad Warsi",
-    role: "AI/ML Engineer",
-    bio: "Specializing in machine learning models for disease detection and market forecasting. Shaikh ensures our AI is accurate and efficient.",
+    role: "UI/UX Designer",
+    bio: "Crafts intuitive and engaging user experiences, ensuring Cropix's interface is beautiful and user-friendly.",
     social: {
       github: "https://github.com/shaikhwarsi",
       linkedin: "https://www.linkedin.com/in/shaikhwarsi",
@@ -33,8 +33,8 @@ const teamMembers = [
   },
   {
     name: "Shamim ul Zaman",
-    role: "UI/UX Designer",
-    bio: "Crafting intuitive and engaging user experiences. Shamim is responsible for the beautiful and user-friendly interface of Cropix.",
+    role: "Director/Guide",
+    bio: "Provides strategic direction and mentorship, ensuring the team's success and innovation.",
     social: {
       github: "https://github.com/shamimulzaman",
       linkedin: "https://www.linkedin.com/in/shamimulzaman",
@@ -43,8 +43,8 @@ const teamMembers = [
   },
   {
     name: "Aaryan Maurya",
-    role: "Data Scientist",
-    bio: "Analyzing vast datasets to extract valuable insights for crop recommendation and optimization. Aaryan's work drives our data-driven decisions.",
+    role: "Backend Dev",
+    bio: "Builds and maintains the robust infrastructure that powers Cropix, focusing on data-driven insights and optimization.",
     social: {
       github: "https://github.com/aaryanmaurya",
       linkedin: "https://www.linkedin.com/in/aaryanmaurya",
@@ -65,9 +65,7 @@ export default function AboutPage() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6">
-            About <span className="text-primary">Cropix</span>
-          </h1>
+
           <MotionH1
             className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-8"
             initial={{ opacity: 0, y: -50, scale: 0.8 }}

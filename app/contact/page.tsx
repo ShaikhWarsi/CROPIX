@@ -139,7 +139,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">support@cropix.com</p>
+                    <p className="text-muted-foreground">gunnu@gmail.com</p>
                   </div>
                 </div>
               </CardContent>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+91 9131823270</p>
                   </div>
                 </div>
               </CardContent>
@@ -186,11 +186,9 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Office</h3>
+                    <h3 className="font-semibold text-foreground">Location</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      123 Agriculture Ave
-                      <br />
-                      Farm City, FC 12345
+                      vit bhopal , madhyapradesh , India
                     </p>
                   </div>
                 </div>
