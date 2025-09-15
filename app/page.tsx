@@ -226,6 +226,139 @@ export default function HomePage() {
             </div>
           </MotionDiv>
         </div>
+
+        {/* How Cropix Works Section */}
+        <section className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-card to-background overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <MotionDiv
+              className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 organic-blob"
+              animate={{ scale: [1, 1.05, 1], rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            />
+            <MotionDiv
+              className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 organic-blob-2"
+              animate={{ scale: [1, 0.95, 1], x: [0, 10, -10, 0] }}
+              transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 5 }}
+            />
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <MotionH1
+              className="text-4xl sm:text-5xl font-bold text-foreground mb-6"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8 }}
+            >
+              How Cropix Works
+            </MotionH1>
+            <MotionP
+              className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Leveraging cutting-edge AI and diverse data sources to provide you with actionable agricultural insights.
+            </MotionP>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <MotionDiv
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-left order-1 md:order-2"
+              >
+                <h3 className="text-3xl font-bold text-foreground mb-4">Data-Driven Insights</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  Cropix integrates vast datasets from satellite imagery, real-time weather patterns, and comprehensive soil analysis to build a holistic view of your agricultural landscape. Our platform processes this information to identify key trends and potential issues before they escalate.
+                </p>
+                <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
+                  <li>Satellite Imagery: High-resolution views for crop health monitoring.</li>
+                  <li>Weather Data: Hyper-local forecasts for optimal planting and harvesting.</li>
+                  <li>Soil Analysis: Detailed reports on nutrient levels and moisture content.</li>
+                </ul>
+              </MotionDiv>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mt-16 md:mt-24">
+              <MotionDiv
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-left order-1 md:order-1"
+              >
+                <h3 className="text-3xl font-bold text-foreground mb-4">Advanced Analytics & AI</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  Our proprietary AI algorithms analyze the collected data to provide precise recommendations. From optimal crop selection and personalized fertilizer plans to early disease detection and market price predictions, Cropix empowers you with intelligence to maximize yield and profitability.
+                </p>
+                <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
+                  <li>Predictive Modeling: Forecast yields and market trends with high accuracy.</li>
+                  <li>Machine Learning: Continuously learns from new data to refine recommendations.</li>
+                  <li>Disease Detection: Image recognition for instant identification of crop ailments.</li>
+                </ul>
+              </MotionDiv>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mt-16 md:mt-24">
+              <MotionDiv
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-left order-1 md:order-2"
+              >
+                <h3 className="text-3xl font-bold text-foreground mb-4">Supported Regions & Crops</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  Cropix is designed for global applicability, supporting a wide range of crops and agricultural regions. Our models are trained on diverse geographical and climatic data to ensure relevance and accuracy wherever you farm.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left text-muted-foreground">
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Supported Regions:</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>North America</li>
+                      <li>Europe</li>
+                      <li>Asia-Pacific</li>
+                      <li>South America</li>
+                      <li>Africa</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">Key Supported Crops:</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Corn</li>
+                      <li>Wheat</li>
+                      <li>Soybeans</li>
+                      <li>Rice</li>
+                      <li>Potatoes</li>
+                    </ul>
+                  </div>
+                </div>
+              </MotionDiv>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mt-16 md:mt-24">
+              <MotionDiv
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-left order-1 md:order-1"
+              >
+                <h3 className="text-3xl font-bold text-foreground mb-4">Accuracy & Disclaimers</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                  While Cropix strives for the highest accuracy in its predictions and recommendations, agricultural outcomes can be influenced by numerous unpredictable factors. Our tools are designed to assist decision-making, not replace expert judgment. Always consider local conditions and professional advice.
+                </p>
+                <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
+                  <li>Continuous Improvement: Models are constantly updated with new data.</li>
+                  <li>User Feedback: Your input helps us refine our algorithms.</li>
+                  <li>Consult Experts: Always cross-reference with local agricultural specialists.</li>
+                </ul>
+              </MotionDiv>
+            </div>
+          </div>
+        </section>
       </main>
 
       <MotionFooter

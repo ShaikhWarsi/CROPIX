@@ -54,25 +54,25 @@ export default function FormPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
       {/* Main Content */}
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Page Title */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 text-balance">
             Crop Recommendation
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
             Enter your soil and environmental data to get personalized crop recommendations
           </p>
         </div>
 
         {/* Form Card */}
-        <Card className="border-2 border-border shadow-lg hover:shadow-xl transition-shadow duration-200">
+        <Card className="border-2 border-green-200 shadow-lg hover:shadow-xl transition-shadow duration-200">
           <CardHeader>
-            <CardTitle className="text-lg sm:text-xl text-primary">
+            <CardTitle className="text-lg sm:text-xl text-green-700">
               Step {step} of 2: {step === 1 ? "Soil Nutrients" : "Environmental Conditions"}
             </CardTitle>
           </CardHeader>
@@ -82,7 +82,7 @@ export default function FormPage() {
                 <>
                   {/* Nitrogen Value */}
                   <div className="space-y-2">
-                    <Label htmlFor="nitrogen" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="nitrogen" className="text-sm font-medium text-gray-700">
                       Nitrogen Value (N)
                     </Label>
                     <Input
@@ -98,7 +98,7 @@ export default function FormPage() {
 
                   {/* Phosphorus Value */}
                   <div className="space-y-2">
-                    <Label htmlFor="phosphorus" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="phosphorus" className="text-sm font-medium text-gray-700">
                       Phosphorus Value (P)
                     </Label>
                     <Input
@@ -114,7 +114,7 @@ export default function FormPage() {
 
                   {/* Potassium Value */}
                   <div className="space-y-2">
-                    <Label htmlFor="potassium" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="potassium" className="text-sm font-medium text-gray-700">
                       Potassium Value (K)
                     </Label>
                     <Input
@@ -137,7 +137,7 @@ export default function FormPage() {
                 <>
                   {/* Rainfall Value */}
                   <div className="space-y-2">
-                    <Label htmlFor="rainfall" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="rainfall" className="text-sm font-medium text-gray-700">
                       Rainfall Value (mm)
                     </Label>
                     <Input
@@ -153,7 +153,7 @@ export default function FormPage() {
 
                   {/* Soil pH */}
                   <div className="space-y-2">
-                    <Label htmlFor="soilPh" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="soilPh" className="text-sm font-medium text-gray-700">
                       Soil pH
                     </Label>
                     <Input
@@ -172,7 +172,7 @@ export default function FormPage() {
 
                   {/* Temperature */}
                   <div className="space-y-2">
-                    <Label htmlFor="temperature" className="text-sm font-medium text-foreground">
+                    <Label htmlFor="temperature" className="text-sm font-medium text-gray-700">
                       Temperature (°C)
                     </Label>
                     <Input
@@ -232,18 +232,18 @@ export default function FormPage() {
 
         {/* Results Card */}
         {showResult && (
-          <Card className="mt-8 border-2 border-border bg-card shadow-lg animate-in slide-in-from-bottom-4 duration-500">
+          <Card className="mt-8 border-2 border-green-300 bg-green-50 shadow-lg animate-in slide-in-from-bottom-4 duration-500">
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
-                  <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-primary mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">
                   Recommended Crop: {recommendation}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-green-700 leading-relaxed mb-4">
                   Based on your soil and environmental conditions, {recommendation.toLowerCase()} would be an excellent
                   choice for your farm.
                 </p>
