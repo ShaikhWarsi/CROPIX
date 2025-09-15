@@ -10,8 +10,9 @@ const MotionH1 = dynamic(() => import('framer-motion').then(mod => mod.motion.h1
 const MotionSpan = dynamic(() => import('framer-motion').then(mod => mod.motion.span), { ssr: false });
 const MotionP = dynamic(() => import('framer-motion').then(mod => mod.motion.p), { ssr: false });
 const MotionFooter = dynamic(() => import('framer-motion').then(mod => mod.motion.footer), { ssr: false });
+const MotionH2 = dynamic(() => import('framer-motion').then(mod => mod.motion.h2), { ssr: false });
 
-import { Sprout, TestTube, Camera, CloudSun, Leaf, Sun, Droplets } from "lucide-react"
+import { Sprout, TestTube, CloudSun, Leaf, Sun, Droplets, LeafyGreen, BugPlay, Camera } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -124,19 +125,21 @@ export default function HomePage() {
               transition={{ duration: 1, delay: 0.7 }}
             >
               <MotionDiv whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }} className="relative group">
-                <Button
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-                >
-                  <MotionDiv
-                    className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={false}
-                  />
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Sprout className="w-5 h-5" />
-                    Get Started
-                  </span>
-                </Button>
+                <Link href="/crop-recommendation">
+                  <Button
+                    size="lg"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+                  >
+                    <MotionDiv
+                      className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={false}
+                    />
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Sprout className="w-5 h-5" />
+                      Get Started
+                    </span>
+                  </Button>
+                </Link>
               </MotionDiv>
 
               <MotionDiv whileHover={{ scale: 1.02 }} className="text-muted-foreground text-lg">
@@ -164,20 +167,25 @@ export default function HomePage() {
                   description: "AI-powered suggestions for the best crops based on your soil and climate conditions.",
                   color: "from-green-400/20 to-primary/20",
                   delay: 0,
+                  badge: "New",
+                  link: "/crop-recommendation",
+                },
+                {
+                  icon: LeafyGreen,
+                  title: "Disease Detection",
+                  description: "Upload crop images to instantly detect diseases and get treatment recommendations.",
+                  color: "from-purple-400/20 to-primary/20",
+                  delay: 0.1,
+                  badge: "Popular",
+                  link: "/disease-detection",
                 },
                 {
                   icon: TestTube,
                   title: "Fertilizer Guidance",
                   description: "Precise fertilizer recommendations to optimize your crop yield and soil health.",
                   color: "from-blue-400/20 to-primary/20",
-                  delay: 0.1,
-                },
-                {
-                  icon: Camera,
-                  title: "Disease Detection",
-                  description: "Upload crop images to instantly detect diseases and get treatment recommendations.",
-                  color: "from-purple-400/20 to-primary/20",
                   delay: 0.2,
+                  link: "/fertilizer-guidance",
                 },
                 {
                   icon: CloudSun,
@@ -185,6 +193,7 @@ export default function HomePage() {
                   description: "Stay ahead with accurate weather predictions and market price forecasts.",
                   color: "from-green-400/20 to-primary/20",
                   delay: 0.3,
+                  link: "/market-forecast",
                 },
               ].map((feature, index) => (
                 <MotionDiv
@@ -204,27 +213,91 @@ export default function HomePage() {
                     className={`absolute inset-0 bg-gradient-to-br ${feature.color} organic-blob opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl`}
                   />
 
-                  <div className="relative bg-card/80 backdrop-blur-sm p-8 rounded-3xl border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
-                    <MotionDiv
-                      className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <feature.icon className="w-10 h-10 text-primary" />
-                    </MotionDiv>
+                  <Link href={feature.link}>
+                    <div className="relative bg-card/80 backdrop-blur-sm p-8 rounded-3xl border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+                      <MotionDiv
+                        className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                        whileHover={{ rotate: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <feature.icon className="w-10 h-10 text-primary" />
+                      </MotionDiv>
 
-                    <h3 className="text-xl font-bold text-card-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                      {feature.title}
-                    </h3>
+                      <h3 className="text-xl font-bold text-card-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+                        {feature.title}
+                      </h3>
 
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </div>
+                      <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                    </div>
+                  </Link>
                 </MotionDiv>
               ))}
             </div>
           </MotionDiv>
         </div>
       </main>
+
+      <section className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <MotionH2
+            className="text-4xl sm:text-5xl font-bold mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            How It Works
+          </MotionH2>
+          <MotionP
+            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Simple steps to get started with Cropix and revolutionize your farming.
+          </MotionP>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <MotionDiv
+            className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg border border-border/50"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Sprout className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">1. Select Your Crop</h3>
+            <p className="text-muted-foreground">Choose from a wide variety of crops you plan to grow.</p>
+          </MotionDiv>
+
+          <MotionDiv
+            className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg border border-border/50"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <TestTube className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">2. Analyze Soil & Climate</h3>
+            <p className="text-muted-foreground">Input your soil data and local climate conditions.</p>
+          </MotionDiv>
+
+          <MotionDiv
+            className="flex flex-col items-center text-center p-6 rounded-2xl shadow-lg border border-border/50"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <CloudSun className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">3. Get Recommendations</h3>
+            <p className="text-muted-foreground">Receive personalized crop and fertilizer recommendations.</p>
+          </MotionDiv>
+        </div>
+      </section>
 
       <MotionFooter
         className="relative bg-gradient-to-t from-card to-background border-t border-border/50 py-16"
