@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { ThemeProvider } from "../components/theme-provider"
 import "./globals.css"
+import { Toaster } from "../components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Cropix - Smart Crop Recommendations",
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <Suspense fallback={null}>{children}</Suspense>
           <Analytics />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

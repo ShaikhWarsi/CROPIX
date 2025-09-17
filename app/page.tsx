@@ -362,7 +362,7 @@ export default function HomePage() {
       </main>
 
       <MotionFooter
-        className="relative bg-gradient-to-t from-card to-background border-t border-border/50 py-16"
+        className="relative bg-gradient-to-t from-card to-background border-t border-border/50 py-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}

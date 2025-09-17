@@ -11,12 +11,12 @@ import React, { useState } from 'react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     subject: '',
     message: '',
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -26,14 +26,38 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the form data to a backend service
-    alert('Thank you for your message! We will get back to you soon.');
+    
+    const webhookUrl = `https://discord.com/api/webhooks/1417623573820080300/shSKmr6Wwa_mzlNcLcTChJubnf5__iuo_jNyTWXKAOUIO2LlSIfUoGwlI4dSDDIRG-Vx`;
+
+    const messageContent = `New Contact Form Submission:\n\n` +
+                           `**Name:** ${formData.name}\n` +
+                           `**Email:** ${formData.email}\n` +
+                           `**Subject:** ${formData.subject}\n` +
+                           `**Message:**\n${formData.message}`;
+
+    try {
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: messageContent }),
+      });
+      console.log('Form submitted:', formData);
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error sending form data to webhook:', error);
+      // Optionally, you can still show an error toast if submission fails
+      // toast({
+      //   title: 'Error',
+      //   description: 'There was an error sending your message. Please try again later.',
+      //   variant: 'destructive',
+      // });
+    }
     setFormData({
-      firstName: '',
-      lastName: '',
+      name: '',
       email: '',
       subject: '',
       message: '',
@@ -55,72 +79,70 @@ export default function ContactPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Contact Form */}
-          <Card className="border-2 border-border hover:shadow-lg transition-shadow duration-200">
-            <CardHeader>
-              <CardTitle className="text-lg sm:text-xl text-primary">Send us a message</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Contact Form or Success Message */}
+          {submitted ? (
+            <Card className="border-2 border-border hover:shadow-lg transition-shadow duration-200 flex items-center justify-center p-8">
+              <CardContent className="text-center">
+                <h2 className="text-2xl font-bold text-primary mb-4">Thank You for Contacting Us!</h2>
+                <p className="text-muted-foreground text-lg">We have received your message and will get back to you shortly.</p>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="border-2 border-border hover:shadow-lg transition-shadow duration-200">
+              <CardHeader>
+                <CardTitle className="text-lg sm:text-xl text-primary">Send us a message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
-                      id="firstName"
-                      value={formData.firstName}
+                      id="name"
+                      value={formData.name}
                       onChange={handleChange}
                       className="border-border focus:border-primary focus:ring-primary transition-colors"
                     />
                   </div>
+
                   <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
-                      id="lastName"
-                      value={formData.lastName}
+                      id="email"
+                      type="email"
+                      value={formData.email}
                       onChange={handleChange}
                       className="border-border focus:border-primary focus:ring-primary transition-colors"
                     />
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="border-border focus:border-primary focus:ring-primary transition-colors"
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      id="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="border-border focus:border-primary focus:ring-primary transition-colors"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="border-border focus:border-primary focus:ring-primary transition-colors"
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="border-border focus:border-primary focus:ring-primary transition-colors"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="border-border focus:border-primary focus:ring-primary transition-colors"
-                  />
-                </div>
-
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg">
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Contact Information */}
           <div className="space-y-6 sm:space-y-8">
