@@ -293,7 +293,7 @@ export default function HomePage() {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Leveraging cutting-edge AI and diverse data sources to provide you with actionable agricultural insights.
+              Cropix harnesses the power of AI, utilizing models trained on vast agricultural datasets, to deliver accurate crop recommendations, detect diseases, forecast market trends, and offer personalized guidance for sustainable and productive farming.
             </MotionP>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -306,12 +306,12 @@ export default function HomePage() {
               >
                 <h3 className="text-3xl font-bold text-foreground mb-4">Data-Driven Insights</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                  Cropix integrates vast datasets from satellite imagery, real-time weather patterns, and comprehensive soil analysis to build a holistic view of your agricultural landscape. Our platform processes this information to identify key trends and potential issues before they escalate.
+                  Cropix gathers and processes extensive agricultural data, including historical crop yields, soil composition, and local weather patterns. This information is meticulously analyzed to provide a comprehensive understanding of your farm's unique environment.
                 </p>
                 <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
-                  <li>Satellite Imagery: High-resolution views for crop health monitoring.</li>
-                  <li>Weather Data: Hyper-local forecasts for optimal planting and harvesting.</li>
-                  <li>Soil Analysis: Detailed reports on nutrient levels and moisture content.</li>
+                  <li>Historical Data: Analyzing past performance for future predictions.</li>
+                  <li>Soil Composition: Understanding nutrient levels and pH for optimal growth.</li>
+                  <li>Weather Patterns: Utilizing local forecasts to guide planting and harvesting schedules.</li>
                 </ul>
               </MotionDiv>
             </div>
@@ -324,14 +324,14 @@ export default function HomePage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="text-left order-1 md:order-1"
               >
-                <h3 className="text-3xl font-bold text-foreground mb-4">Advanced Analytics & AI</h3>
+                <h3 className="text-3xl font-bold text-foreground mb-4">Advanced AI & Machine Learning</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                  Our proprietary AI algorithms analyze the collected data to provide precise recommendations. From optimal crop selection and personalized fertilizer plans to early disease detection and market price predictions, Cropix empowers you with intelligence to maximize yield and profitability.
+                  Our platform employs advanced AI and machine learning models, specifically trained on vast agricultural datasets. These models learn from complex patterns to predict crop yields, recommend optimal fertilizers, detect plant diseases from images, and forecast market prices with high accuracy.
                 </p>
                 <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
-                  <li>Predictive Modeling: Forecast yields and market trends with high accuracy.</li>
-                  <li>Machine Learning: Continuously learns from new data to refine recommendations.</li>
-                  <li>Disease Detection: Image recognition for instant identification of crop ailments.</li>
+                  <li>Predictive Models: Forecasting crop yields and market trends.</li>
+                  <li>Image Recognition: Instantly identifying plant diseases from uploaded photos.</li>
+                  <li>Recommendation Engines: Tailoring advice for fertilizers and crop types.</li>
                 </ul>
               </MotionDiv>
             </div>
