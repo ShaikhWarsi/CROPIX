@@ -32,7 +32,7 @@ const teamMembers = [
     },
   },
   {
-    name: "Shamim ul Zaman",
+    name: "Shamim Uz Zaman",
     role: "Director/Guide",
     bio: "Provides strategic direction and mentorship, ensuring the team's success and innovation.",
     social: {
@@ -121,3 +121,4 @@ export default function AboutPage() {
     </div>
   );
 }
+
