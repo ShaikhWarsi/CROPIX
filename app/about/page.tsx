@@ -16,7 +16,7 @@ const teamMembers = [
     role: "Team Lead",
     bio: "Guides the development of Cropix's core features, leveraging his passion for AI in agriculture.",
     social: {
-      github: "https://github.com/rachittiwari",
+      github: "https://github.com/Bit",
       linkedin: "https://www.linkedin.com/in/rachittiwari",
       instagram: "https://www.instagram.com/rachittiwari",
     },
@@ -28,7 +28,7 @@ const teamMembers = [
     social: {
       github: "https://github.com/shaikhwarsi",
       linkedin: "https://www.linkedin.com/in/shaikhwarsi",
-      instagram: "https://www.instagram.com/shaikhwarsi",
+      instagram: "https://www.instagram.com/yamin_shaikh28",
     },
   },
   {
@@ -121,4 +121,5 @@ export default function AboutPage() {
     </div>
   );
 }
+
 
