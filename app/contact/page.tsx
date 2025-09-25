@@ -224,7 +224,7 @@ export default function ContactPage() {
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 Ready to get crop recommendations? Try our tool now!
               </p>
-              <Link href="/crop-recommendation">
+              <Link href="/#model-boxes">
                 <Button
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
@@ -239,3 +239,4 @@ export default function ContactPage() {
     </div>
   )
 }
+
