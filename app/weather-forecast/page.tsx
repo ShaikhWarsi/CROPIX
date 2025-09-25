@@ -158,12 +158,6 @@ export default function WeatherForecastPage() {
                 </motion.div>
               </div>
 
-              <div className="bg-yellow-50 p-4 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-2">Additional Info</h3>
-                <p className="text-gray-700">Wind Speed: {weatherData.forecast[0].max_wind_kph} kph</p>
-                <p className="text-gray-700">Pressure: {weatherData.forecast[0].pressure_mb} mb</p>
-              </div>
-
               <div className="mt-4 p-4 bg-green-50 rounded-lg">
                 <p className="text-sm text-green-800">
                   <strong>Farming Tip:</strong> Adjust irrigation based on humidity and rainfall. Protect crops from strong winds if necessary.
