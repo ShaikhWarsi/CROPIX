@@ -12,13 +12,6 @@ import { motion } from "framer-motion" // Import motion
 
 export default function FormPage() {
   const [formData, setFormData] = useState({
-    N: "",
-    P: "",
-    K: "",
-    temperature: "",
-    humidity: "",
-    ph: "",
-    rainfall: "",
     Crop: "",
     Season: "",
     Area: "",
@@ -60,13 +53,6 @@ export default function FormPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          N: parseFloat(formData.N),
-          P: parseFloat(formData.P),
-          K: parseFloat(formData.K),
-          temperature: parseFloat(formData.temperature),
-          humidity: parseFloat(formData.humidity),
-          ph: parseFloat(formData.ph),
-          rainfall: parseFloat(formData.rainfall),
           Crop: formData.Crop,
           Season: formData.Season,
           Area: parseFloat(formData.Area),
@@ -82,6 +68,7 @@ export default function FormPage() {
       }
 
       const data = await response.json();
+      console.log("Raw predicted_yield from backend:", data.predicted_yield);
       setRecommendation(data.predicted_yield);
       setShowResult(true);
     } catch (error) {
@@ -123,299 +110,156 @@ export default function FormPage() {
           <Card className="border-2 border-green-200 shadow-lg hover:shadow-xl transition-shadow duration-200 bg-white/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-xl sm:text-2xl text-green-700 font-bold">
-                Step {step} of 3: {step === 1 ? "Soil Nutrients" : step === 2 ? "Environmental Conditions" : "Crop & Farm Details"}
+                Crop & Farm Details
               </CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                {step === 1 && (
-                  <>
-                    {/* Nitrogen Value */}
-                    <div className="space-y-2">
-                      <Label htmlFor="N" className="text-sm font-medium text-gray-700">
-                        Nitrogen Value (N)
-                      </Label>
-                      <Input
-                        id="N"
-                        type="number"
-                        placeholder="Enter Nitrogen value"
-                        value={formData.N}
-                        onChange={(e) => handleInputChange("N", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
+                {/* Crop Type */}
+                <div className="space-y-2">
+                  <Label htmlFor="Crop" className="text-sm font-medium text-gray-700">
+                    Crop Type
+                  </Label>
+                  <Input
+                    id="Crop"
+                    type="text"
+                    placeholder="e.g., Wheat, Rice"
+                    value={formData.Crop}
+                    onChange={(e) => handleInputChange("Crop", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                    {/* Phosphorus Value */}
-                    <div className="space-y-2">
-                      <Label htmlFor="P" className="text-sm font-medium text-gray-700">
-                        Phosphorus Value (P)
-                      </Label>
-                      <Input
-                        id="P"
-                        type="number"
-                        placeholder="Enter Phosphorus value"
-                        value={formData.P}
-                        onChange={(e) => handleInputChange("P", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
+                {/* Season */}
+                <div className="space-y-2">
+                  <Label htmlFor="Season" className="text-sm font-medium text-gray-700">
+                    Season
+                  </Label>
+                  <Input
+                    id="Season"
+                    type="text"
+                    placeholder="e.g., Kharif, Rabi"
+                    value={formData.Season}
+                    onChange={(e) => handleInputChange("Season", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                    {/* Potassium Value */}
-                    <div className="space-y-2">
-                      <Label htmlFor="K" className="text-sm font-medium text-gray-700">
-                        Potassium Value (K)
-                      </Label>
-                      <Input
-                        id="K"
-                        type="number"
-                        placeholder="Enter Potassium value"
-                        value={formData.K}
-                        onChange={(e) => handleInputChange("K", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-                    <Button type="button" onClick={handleNextStep} className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                      Next
-                    </Button>
-                  </>
-                )}
+                {/* Area */}
+                <div className="space-y-2">
+                  <Label htmlFor="Area" className="text-sm font-medium text-gray-700">
+                    Area (hectares)
+                  </Label>
+                  <Input
+                    id="Area"
+                    type="number"
+                    placeholder="Enter farm area in hectares"
+                    value={formData.Area}
+                    onChange={(e) => handleInputChange("Area", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                {step === 2 && (
-                  <>
-                    {/* Temperature */}
-                    <div className="space-y-2">
-                      <Label htmlFor="temperature" className="text-sm font-medium text-gray-700">
-                        Temperature (°C)
-                      </Label>
-                      <Input
-                        id="temperature"
-                        type="number"
-                        placeholder="Enter temperature in Celsius"
-                        value={formData.temperature}
-                        onChange={(e) => handleInputChange("temperature", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
+                {/* Fertilizer */}
+                <div className="space-y-2">
+                  <Label htmlFor="Fertilizer" className="text-sm font-medium text-gray-700">
+                    Fertilizer (tonnes)
+                  </Label>
+                  <Input
+                    id="Fertilizer"
+                    type="number"
+                    placeholder="Enter fertilizer amount in tonnes"
+                    value={formData.Fertilizer}
+                    onChange={(e) => handleInputChange("Fertilizer", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                    {/* Humidity */}
-                    <div className="space-y-2">
-                      <Label htmlFor="humidity" className="text-sm font-medium text-gray-700">
-                        Humidity (%)
-                      </Label>
-                      <Input
-                        id="humidity"
-                        type="number"
-                        placeholder="Enter humidity percentage"
-                        value={formData.humidity}
-                        onChange={(e) => handleInputChange("humidity", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
+                {/* Crop Year */}
+                <div className="space-y-2">
+                  <Label htmlFor="Crop_Year" className="text-sm font-medium text-gray-700">
+                    Crop Year
+                  </Label>
+                  <Input
+                    id="Crop_Year"
+                    type="number"
+                    placeholder="Enter crop year"
+                    value={formData.Crop_Year}
+                    onChange={(e) => handleInputChange("Crop_Year", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                    {/* pH Value */}
-                    <div className="space-y-2">
-                      <Label htmlFor="ph" className="text-sm font-medium text-gray-700">
-                        pH Value
-                      </Label>
-                      <Input
-                        id="ph"
-                        type="number"
-                        step="0.1"
-                        min="0"
-                        max="14"
-                        placeholder="Enter soil pH (0-14)"
-                        value={formData.ph}
-                        onChange={(e) => handleInputChange("ph", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
+                {/* Pesticide */}
+                <div className="space-y-2">
+                  <Label htmlFor="Pesticide" className="text-sm font-medium text-gray-700">
+                    Pesticide (tonnes)
+                  </Label>
+                  <Input
+                    id="Pesticide"
+                    type="number"
+                    placeholder="Enter pesticide amount in tonnes"
+                    value={formData.Pesticide}
+                    onChange={(e) => handleInputChange("Pesticide", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                    {/* Rainfall Value */}
-                    <div className="space-y-2">
-                      <Label htmlFor="rainfall" className="text-sm font-medium text-gray-700">
-                        Rainfall (mm)
-                      </Label>
-                      <Input
-                        id="rainfall"
-                        type="number"
-                        placeholder="Enter rainfall in mm"
-                        value={formData.rainfall}
-                        onChange={(e) => handleInputChange("rainfall", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-                    <div className="flex gap-4">
-                      <Button type="button" onClick={handlePrevStep} variant="outline" className="w-1/2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors">
-                        Previous
-                      </Button>
-                      <Button type="button" onClick={handleNextStep} className="w-1/2 bg-green-600 hover:bg-green-700 text-white py-3 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                        Next
-                      </Button>
-                    </div>
-                  </>
-                )}
+                {/* Annual Rainfall */}
+                <div className="space-y-2">
+                  <Label htmlFor="Annual_Rainfall" className="text-sm font-medium text-gray-700">
+                    Annual Rainfall (mm)
+                  </Label>
+                  <Input
+                    id="Annual_Rainfall"
+                    type="number"
+                    placeholder="Enter annual rainfall in mm"
+                    value={formData.Annual_Rainfall}
+                    onChange={(e) => handleInputChange("Annual_Rainfall", e.target.value)}
+                    className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
+                    required
+                  />
+                </div>
 
-                {step === 3 && (
-                  <>
-                    {/* Crop Type */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Crop" className="text-sm font-medium text-gray-700">
-                        Crop Type
-                      </Label>
-                      <Input
-                        id="Crop"
-                        type="text"
-                        placeholder="e.g., Wheat, Rice"
-                        value={formData.Crop}
-                        onChange={(e) => handleInputChange("Crop", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Season */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Season" className="text-sm font-medium text-gray-700">
-                        Season
-                      </Label>
-                      <Input
-                        id="Season"
-                        type="text"
-                        placeholder="e.g., Kharif, Rabi"
-                        value={formData.Season}
-                        onChange={(e) => handleInputChange("Season", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Area */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Area" className="text-sm font-medium text-gray-700">
-                        Area (acres)
-                      </Label>
-                      <Input
-                        id="Area"
-                        type="number"
-                        placeholder="Enter farm area in acres"
-                        value={formData.Area}
-                        onChange={(e) => handleInputChange("Area", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Fertilizer */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Fertilizer" className="text-sm font-medium text-gray-700">
-                        Fertilizer (kg)
-                      </Label>
-                      <Input
-                        id="Fertilizer"
-                        type="number"
-                        placeholder="Enter fertilizer amount in kg"
-                        value={formData.Fertilizer}
-                        onChange={(e) => handleInputChange("Fertilizer", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Crop Year */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Crop_Year" className="text-sm font-medium text-gray-700">
-                        Crop Year
-                      </Label>
-                      <Input
-                        id="Crop_Year"
-                        type="number"
-                        placeholder="Enter crop year"
-                        value={formData.Crop_Year}
-                        onChange={(e) => handleInputChange("Crop_Year", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Pesticide */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Pesticide" className="text-sm font-medium text-gray-700">
-                        Pesticide (kg)
-                      </Label>
-                      <Input
-                        id="Pesticide"
-                        type="number"
-                        placeholder="Enter pesticide amount in kg"
-                        value={formData.Pesticide}
-                        onChange={(e) => handleInputChange("Pesticide", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    {/* Annual Rainfall */}
-                    <div className="space-y-2">
-                      <Label htmlFor="Annual_Rainfall" className="text-sm font-medium text-gray-700">
-                        Annual Rainfall (mm)
-                      </Label>
-                      <Input
-                        id="Annual_Rainfall"
-                        type="number"
-                        placeholder="Enter annual rainfall in mm"
-                        value={formData.Annual_Rainfall}
-                        onChange={(e) => handleInputChange("Annual_Rainfall", e.target.value)}
-                        className="border-green-300 focus:border-green-500 focus:ring-green-500 transition-all duration-200 hover:border-green-400"
-                        required
-                      />
-                    </div>
-
-                    <div className="flex gap-4">
-                      <Button type="button" onClick={handlePrevStep} variant="outline" className="w-1/2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors">
-                        Previous
-                      </Button>
-                      <Button
-                        type="submit"
-                        disabled={isLoading}
-                        className="w-1/2 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white py-3 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none"
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white py-3 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
                       >
-                        {isLoading ? (
-                          <div className="flex items-center justify-center">
-                            <svg
-                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              ></circle>
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                              ></path>
-                            </svg>
-                            Predicting...
-                          </div>
-                        ) : (
-                          "Predict Yield"
-                        )}
-                      </Button>
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Predicting...
                     </div>
-                  </>
-                )}
+                  ) : (
+                    "Predict Yield"
+                  )}
+                </Button>
               </form>
             </CardContent>
           </Card>
@@ -437,10 +281,10 @@ export default function FormPage() {
                     </svg>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">
-                    Predicted Crop Yield: {typeof recommendation === 'number' ? (recommendation / 1000).toFixed(2) : recommendation} tonnes/hectare
+                    Predicted Crop Yield: {typeof recommendation === 'number' ? recommendation.toFixed(2) : recommendation} tonnes/hectare
                   </h3>
                   <p className="text-green-700 leading-relaxed mb-4">
-                    Based on your inputs, the predicted crop yield is approximately {typeof recommendation === 'number' ? (recommendation / 1000).toFixed(2) : recommendation} tonnes/hectare.
+                    Based on your inputs, the predicted crop yield is approximately {typeof recommendation === 'number' ? recommendation.toFixed(2) : recommendation} tonnes/hectare.
                   </p>
                   <Button
                     onClick={() => setShowResult(false)}
