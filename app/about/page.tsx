@@ -13,8 +13,8 @@ import { Github, Linkedin, Instagram } from "lucide-react";
 const teamMembers = [
   {
     name: "Rachit Tiwari",
-    role: "Lead Developer",
-    bio: "Passionate about AI and its applications in agriculture. Rachit leads the development of Cropix's core features.",
+    role: "Team Lead",
+    bio: "Guides the development of Cropix's core features, leveraging his passion for AI in agriculture.",
     social: {
       github: "https://github.com/rachittiwari",
       linkedin: "https://www.linkedin.com/in/rachittiwari",
@@ -23,42 +23,32 @@ const teamMembers = [
   },
   {
     name: "Shaikh Mohammad Warsi",
-    role: "AI/ML Engineer",
-    bio: "Specializing in machine learning models for disease detection and market forecasting. Shaikh ensures our AI is accurate and efficient.",
+    role: "UI/UX and Backend",
+    bio: "Crafts intuitive and engaging user experiences, ensuring Cropix's interface is beautiful and user-friendly.",
     social: {
-      github: "https://github.com:shaikhwarsi",
+      github: "https://github.com/shaikhwarsi",
       linkedin: "https://www.linkedin.com/in/shaikhwarsi",
-      instagram: "https://www.instagram.com/shaikhwarsi",
+      instagram: "https://www.instagram.com/yamin_shaikh28",
+    },
+  },
+  {
+    name: "Shamim ul Zaman",
+    role: "Guide and designer",
+    bio: "Provides strategic direction and mentorship, ensuring the team's success and innovation.",
+    social: {
+      github: "https://github.com/shamimulzaman",
+      linkedin: "https://www.linkedin.com/in/shamimulzaman",
+      instagram: "https://www.instagram.com/shamimulzaman",
     },
   },
   {
     name: "Aaryan Maurya",
-    role: "Data Scientist",
-    bio: "Analyzing vast datasets to extract valuable insights for crop recommendation and optimization. Aaryan's work drives our data-driven decisions.",
+    role: "Model Training",
+    bio: "Builds and maintains the robust infrastructure that powers Cropix, focusing on data-driven insights and optimization.",
     social: {
       github: "https://github.com/aaryanmaurya",
       linkedin: "https://www.linkedin.com/in/aaryanmaurya",
       instagram: "https://www.instagram.com/aaryanmaurya",
-    },
-  },
-  {
-    name: "Sanidhya",
-    role: "CNN and LSTM Specialist",
-    bio: "Focusing on advanced deep learning techniques for image recognition and sequence prediction in agricultural data.",
-    social: {
-      github: "#",
-      linkedin: "#",
-      instagram: "#",
-    },
-  },
-  {
-    name: "Suryansh",
-    role: "Research Paper and PPT Specialist",
-    bio: "Dedicated to compiling comprehensive research papers and creating impactful presentations to showcase Cropix's innovations.",
-    social: {
-      github: "#",
-      linkedin: "#",
-      instagram: "#",
     },
   },
 ];
@@ -75,13 +65,14 @@ export default function AboutPage() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center"
         >
+
           <MotionH1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6"
+            className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-8"
             initial={{ opacity: 0, y: -50, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
           >
-            About <span className="text-primary">Cropix</span>
+            BitLyfe
           </MotionH1>
           <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Empowering farmers with AI-driven insights for smarter, more sustainable agriculture.
