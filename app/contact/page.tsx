@@ -210,9 +210,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground">Created by students of</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      VIT Bhopal, M.P., India
+                      VIT Bhopal, M.P.
                       <br />
-                      Farm City, FC 12345
+                      India
                     </p>
                   </div>
                 </div>
@@ -239,4 +239,3 @@ export default function ContactPage() {
     </div>
   )
 }
-
