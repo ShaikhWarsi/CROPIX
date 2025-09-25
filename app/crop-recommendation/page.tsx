@@ -437,10 +437,10 @@ export default function FormPage() {
                     </svg>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-green-800 mb-2">
-                    Predicted Crop Yield: {typeof recommendation === 'number' ? recommendation.toFixed(2) : recommendation} kg/hectare
+                    Predicted Crop Yield: {typeof recommendation === 'number' ? (recommendation / 1000).toFixed(2) : recommendation} tonnes/hectare
                   </h3>
                   <p className="text-green-700 leading-relaxed mb-4">
-                    Based on your inputs, the predicted crop yield is approximately {typeof recommendation === 'number' ? recommendation.toFixed(2) : recommendation} kg/hectare.
+                    Based on your inputs, the predicted crop yield is approximately {typeof recommendation === 'number' ? (recommendation / 1000).toFixed(2) : recommendation} tonnes/hectare.
                   </p>
                   <Button
                     onClick={() => setShowResult(false)}

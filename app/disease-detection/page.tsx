@@ -61,22 +61,26 @@ export default function DiseaseDetectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
       <Navigation />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 text-center mb-4">Detect Crop Diseases</h1>
-          <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-4 text-balance leading-tight">Detect Crop Diseases</h1>
+          <p className="text-base sm:text-lg text-gray-700 text-center mb-12 max-w-2xl mx-auto">
             Upload an image of your crop to get instant disease detection and treatment recommendations.
           </p>
         </motion.div>
 
         <motion.div
           className="bg-white rounded-2xl shadow-lg border-2 border-green-200 p-8"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           {!uploadedImage ? (
             <div className="text-center">
@@ -148,7 +152,7 @@ export default function DiseaseDetectionPage() {
                     setResult(null)
                   }}
                   variant="outline"
-                  className="border-green-300 text-green-700 hover:bg-green-50"
+                  className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors"
                 >
                   Upload Another Image
                 </Button>
