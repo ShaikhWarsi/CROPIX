@@ -11,11 +11,11 @@ const MotionSpan = dynamic(() => import('framer-motion').then(mod => mod.motion.
 const MotionP = dynamic(() => import('framer-motion').then(mod => mod.motion.p), { ssr: false });
 const MotionFooter = dynamic(() => import('framer-motion').then(mod => mod.motion.footer), { ssr: false });
 
-import { Sprout, TestTube, Camera, CloudSun, Leaf, Sun, Droplets } from "lucide-react"
+import { Sprout, TestTube, Camera, CloudSun, Leaf, Sun, Droplets, TrendingUp } from "lucide-react"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-card to-background">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
       <Navigation />
 
       <main className="relative overflow-hidden">
@@ -67,7 +67,7 @@ export default function HomePage() {
           </MotionDiv>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
           <MotionDiv
             className="text-center"
             initial={{ opacity: 0, y: 50 }}
@@ -76,9 +76,9 @@ export default function HomePage() {
           >
             <MotionDiv
               className="inline-flex items-center gap-2 bg-card/60 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/20 mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 120 }}
             >
               <Sprout className="w-4 h-4 text-primary animate-gentle-sway" />
               <span className="text-sm font-medium text-card-foreground">AI-Powered Agriculture</span>
@@ -88,7 +88,7 @@ export default function HomePage() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 text-balance leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 100 }}
             >
               <Leaf className="inline-block w-10 h-10 mr-4 text-primary" />
               Smarter Farming{" "}
@@ -102,7 +102,7 @@ export default function HomePage() {
                   className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-primary/30 to-accent/30 leaf-shape"
                   initial={{ scaleX: 0, originX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ duration: 1.2, delay: 1.5, ease: "easeOut" }}
+                  transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
                 />
               </MotionSpan>
             </MotionH1>
@@ -111,7 +111,7 @@ export default function HomePage() {
               className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-10 max-w-5xl mx-auto text-pretty leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.5, type: "spring", stiffness: 100 }}
             >
               Cropix helps you find the best crops, detect diseases, predict markets, and plan ahead with{" "}
               <span className="text-primary font-semibold">AI-powered insights</span> for sustainable agriculture.
@@ -124,7 +124,14 @@ export default function HomePage() {
               transition={{ duration: 1, delay: 0.7 }}
             >
               <Link href="/crop-recommendation">
-                <MotionDiv whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.98 }} className="relative group">
+                <MotionDiv
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative group"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 100 }}
+                >
                   <Button
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-6 text-xl font-semibold rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
@@ -141,9 +148,15 @@ export default function HomePage() {
                 </MotionDiv>
               </Link>
 
-              <MotionDiv whileHover={{ scale: 1.02 }} className="text-muted-foreground text-lg">
+              <MotionDiv
+                whileHover={{ scale: 1.02 }}
+                className="text-muted-foreground text-lg"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.1, type: "spring", stiffness: 100 }}
+              >
                 <span className="flex items-center gap-2">
-                  <Droplets className="w-5 h-5" />
+                  <Droplets className="w-5 h-5 text-primary" />
                   Free to use • No signup required
                 </span>
               </MotionDiv>
@@ -158,7 +171,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.9 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
               {[
                 {
                   icon: Sprout,
@@ -166,6 +179,7 @@ export default function HomePage() {
                   description: "AI-powered suggestions for the best crops based on your soil and climate conditions.",
                   color: "from-green-400/20 to-primary/20",
                   delay: 0,
+                  href: "/crop-recommendation",
                 },
                 {
                   icon: TestTube,
@@ -173,6 +187,7 @@ export default function HomePage() {
                   description: "Precise fertilizer recommendations to optimize your crop yield and soil health.",
                   color: "from-blue-400/20 to-primary/20",
                   delay: 0.1,
+                  href: "/fertilizer-recommendation",
                 },
                 {
                   icon: Camera,
@@ -180,48 +195,67 @@ export default function HomePage() {
                   description: "Upload crop images to instantly detect diseases and get treatment recommendations.",
                   color: "from-purple-400/20 to-primary/20",
                   delay: 0.2,
+                  href: "/disease-detection",
                 },
                 {
                   icon: CloudSun,
-                  title: "Weather & Market Forecast",
-                  description: "Stay ahead with accurate weather predictions and market price forecasts.",
-                  color: "from-green-400/20 to-primary/20",
+                  title: "Weather Forecast",
+                  description: "Stay ahead with accurate weather predictions.",
+                  color: "from-blue-400/20 to-primary/20",
                   delay: 0.3,
+                  href: "/weather-forecast",
+                },
+                {
+                  icon: Leaf,
+                  title: "Soil Crop Recommendation",
+                  description: "Get recommendations for crops based on your soil conditions.",
+                  color: "from-yellow-400/20 to-primary/20",
+                  delay: 0.4,
+                  href: "/soil-crop-recommendation",
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Market Forecast",
+                  description: "Stay ahead with accurate market price forecasts.",
+                  color: "from-green-400/20 to-primary/20",
+                  delay: 0.5,
+                  href: "/market-forecast",
                 },
               ].map((feature, index) => (
-                <MotionDiv
-                  key={index}
-                  className="group relative"
-                  initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 1.1 + feature.delay,
-                    type: "spring",
-                    stiffness: 100,
-                  }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${feature.color} organic-blob opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl`}
-                  />
+                <Link href={feature.href} key={index}>
+                  <MotionDiv
+                    className="group relative"
+                    initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 1.1 + feature.delay,
+                      type: "spring",
+                      stiffness: 100,
+                    }}
+                    whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${feature.color} organic-blob opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl`}
+                    />
 
-                  <div className="relative bg-card/80 backdrop-blur-sm p-8 rounded-3xl border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
-                    <MotionDiv
-                      className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <feature.icon className="w-10 h-10 text-primary" />
-                    </MotionDiv>
+                    <div className="relative bg-card/80 backdrop-blur-sm p-8 rounded-3xl border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 h-[250px] flex flex-col">
+                      <MotionDiv
+                        className="w-16 h-16 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                        whileHover={{ rotate: [0, -10, 10, 0] }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <feature.icon className="w-8 h-8 text-primary" />
+                      </MotionDiv>
 
-                    <h3 className="text-xl font-bold text-card-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                      {feature.title}
-                    </h3>
+                      <h3 className="text-xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors duration-300 h-[30px]">
+                        {feature.title}
+                      </h3>
 
-                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
-                  </div>
-                </MotionDiv>
+                      <p className="text-muted-foreground leading-relaxed text-sm flex-grow overflow-hidden h-[80px]">{feature.description}</p>
+                    </div>
+                  </MotionDiv>
+                </Link>
               ))}
             </div>
           </MotionDiv>
@@ -300,63 +334,6 @@ export default function HomePage() {
                 </ul>
               </MotionDiv>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mt-16 md:mt-24">
-              <MotionDiv
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-left order-1 md:order-2"
-              >
-                <h3 className="text-3xl font-bold text-foreground mb-4">Supported Regions & Crops</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                  Cropix is designed for global applicability, supporting a wide range of crops and agricultural regions. Our models are trained on diverse geographical and climatic data to ensure relevance and accuracy wherever you farm.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left text-muted-foreground">
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Supported Regions:</h4>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>North America</li>
-                      <li>Europe</li>
-                      <li>Asia-Pacific</li>
-                      <li>South America</li>
-                      <li>Africa</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Key Supported Crops:</h4>
-                    <ul className="list-disc list-inside space-y-1">
-                      <li>Corn</li>
-                      <li>Wheat</li>
-                      <li>Soybeans</li>
-                      <li>Rice</li>
-                      <li>Potatoes</li>
-                    </ul>
-                  </div>
-                </div>
-              </MotionDiv>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center mt-16 md:mt-24">
-              <MotionDiv
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-left order-1 md:order-1"
-              >
-                <h3 className="text-3xl font-bold text-foreground mb-4">Accuracy & Disclaimers</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                  While Cropix strives for the highest accuracy in its predictions and recommendations, agricultural outcomes can be influenced by numerous unpredictable factors. Our tools are designed to assist decision-making, not replace expert judgment. Always consider local conditions and professional advice.
-                </p>
-                <ul className="list-disc list-inside text-left text-muted-foreground space-y-2">
-                  <li>Continuous Improvement: Models are constantly updated with new data.</li>
-                  <li>User Feedback: Your input helps us refine our algorithms.</li>
-                  <li>Consult Experts: Always cross-reference with local agricultural specialists.</li>
-                </ul>
-              </MotionDiv>
-            </div>
           </div>
         </section>
       </main>
@@ -378,8 +355,8 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <MotionDiv
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.7 }}
             >
               <div className="flex items-center gap-2 mb-4">
@@ -394,9 +371,9 @@ export default function HomePage() {
             
 
             <MotionDiv
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1.9 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.8, type: "spring", stiffness: 100 }}
             >
               <h4 className="text-lg font-bold text-foreground mb-6">Contact Us</h4>
               <Link href="/contact">
@@ -413,9 +390,9 @@ export default function HomePage() {
             </MotionDiv>
 
             <MotionDiv
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 1.9 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.9, type: "spring", stiffness: 100 }}
             >
               <h4 className="text-lg font-bold text-foreground mb-6">About Us</h4>
               <Link href="/about">

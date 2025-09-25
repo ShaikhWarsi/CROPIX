@@ -3,22 +3,20 @@
 import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { motion } from "framer-motion"
-import { TrendingUp, CalendarDays } from "lucide-react"
+import { Cloud, Thermometer, Droplets, CalendarDays } from "lucide-react"
 
-export default function MarketForecastPage() {
-  const [cropName, setCropName] = useState("")
-  const [weeksToForecast, setWeeksToForecast] = useState("4")
+export default function LSTMWeatherForecastPage() {
+  const [location, setLocation] = useState("")
+  const [days, setDays] = useState("7")
   const [forecastData, setForecastData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const cropOptions = ["Wheat", "Rice", "Corn", "Soybeans"]
-
   const handleChange = (e) => {
-    if (e.target.name === "cropName") {
-      setCropName(e.target.value)
-    } else if (e.target.name === "weeksToForecast") {
-      setWeeksToForecast(e.target.value)
+    if (e.target.name === "location") {
+      setLocation(e.target.value)
+    } else if (e.target.name === "days") {
+      setDays(e.target.value)
     }
   }
 
@@ -29,12 +27,12 @@ export default function MarketForecastPage() {
     setForecastData(null)
 
     try {
-      const response = await fetch("https://yamxxx1-BackendCropix.hf.space/forecast_market_prices/", {
+      const response = await fetch("https://yamxxx1-BackendCropix.hf.space/weather_forecast_lstm/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ crop_name: cropName, weeks_to_forecast: parseInt(weeksToForecast) }),
+        body: JSON.stringify({ city: location, days: parseInt(days) }),
       })
 
       if (!response.ok) {
@@ -65,47 +63,42 @@ export default function MarketForecastPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Market Price Forecast</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">LSTM Weather Forecast</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Predict future market prices for various crops to optimize your selling strategy.
+            Get long-term weather predictions powered by LSTM models for strategic farming decisions.
           </p>
         </motion.div>
 
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cropName">
-                Crop Name
-              </label>
-              <select
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="cropName"
-                name="cropName"
-                value={cropName}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select a crop</option>
-                {cropOptions.map((crop) => (
-                  <option key={crop} value={crop}>
-                    {crop}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="weeksToForecast">
-                Weeks to Forecast
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
+                Location (City)
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="weeksToForecast"
+                id="location"
+                type="text"
+                name="location"
+                value={location}
+                onChange={handleChange}
+                placeholder="Enter city name (e.g., London)"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="days">
+                Days to Forecast
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="days"
                 type="number"
-                name="weeksToForecast"
-                value={weeksToForecast}
+                name="days"
+                value={days}
                 onChange={handleChange}
                 min="1"
-                max="52"
+                max="30"
                 required
               />
             </div>
@@ -116,7 +109,7 @@ export default function MarketForecastPage() {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Forecasting..." : "Get Market Forecast"}
+              {loading ? "Forecasting..." : "Get LSTM Forecast"}
             </button>
           </div>
         </form>
@@ -133,25 +126,36 @@ export default function MarketForecastPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="flex items-center mb-6">
-                <TrendingUp className="w-8 h-8 text-green-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-900">Forecast for {cropName}</h2>
+                <CalendarDays className="w-8 h-8 text-green-600 mr-3" />
+                <h2 className="text-2xl font-bold text-gray-900">LSTM Forecast for {forecastData.city}</h2>
               </div>
 
               <div className="space-y-4">
-                {Object.entries(forecastData.forecast[cropName]).map(([date, price]) => (
-                  <div key={date} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 className="font-semibold text-gray-800 flex items-center">
-                      <CalendarDays className="w-5 h-5 text-purple-500 mr-2" />
-                      {new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
-                    </h3>
-                    <p className="text-lg font-bold text-green-600">${price.toFixed(2)}</p>
+                {forecastData.forecast.map((dayForecast, index) => (
+                  <div key={index} className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Day {dayForecast.day}</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {Object.entries(dayForecast).map(([key, value]) => {
+                        if (key === "day") return null; // Skip displaying the day number again
+                        return (
+                          <div key={key} className="flex items-center">
+                            {key === "temperature" && <Thermometer className="w-5 h-5 text-blue-500 mr-2" />}
+                            {key === "humidity" && <Droplets className="w-5 h-5 text-green-500 mr-2" />}
+                            {key === "rainfall" && <Cloud className="w-5 h-5 text-indigo-500 mr-2" />}
+                            <p className="text-sm text-gray-700">
+                              <span className="font-medium capitalize">{key.replace(/_/g, " ")}:</span> {typeof value === 'number' ? value.toFixed(2) : value}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 ))}
               </div>
 
               <div className="mt-4 p-4 bg-green-50 rounded-lg">
                 <p className="text-sm text-green-800">
-                  <strong>Market Insight:</strong> This forecast helps you anticipate price movements and plan your sales.
+                  <strong>Farming Tip:</strong> Use this long-term forecast to plan planting and harvesting schedules.
                 </p>
               </div>
             </motion.div>

@@ -17,24 +17,47 @@ export default function DiseaseDetectionPage() {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = (e) => {
-        setUploadedImage(e.target?.result as string)
-        analyzeImage()
+      reader.onloadend = () => {
+        setUploadedImage(reader.result as string)
+        analyzeImage(reader.result as string)
       }
       reader.readAsDataURL(file)
     }
   }
 
-  const analyzeImage = () => {
+  const analyzeImage = async (imageData: string) => {
     setIsAnalyzing(true)
-    // Simulate analysis
-    setTimeout(() => {
-      setResult({
-        disease: "Early Blight",
-        action: "Apply copper-based fungicide and improve air circulation around plants",
-      })
-      setIsAnalyzing(false)
-    }, 2000)
+    setResult(null)
+
+    try {
+      const base64Image = imageData.split(",")[1]; // Extract base64 part
+      const response = await fetch("https://yamxxx1-BackendCropix.hf.space/detect_disease/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image_base64: base64Image }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        setResult({ disease: "Error", action: data.error });
+      } else {
+        setResult({
+          disease: data.predicted_disease,
+          action: `Confidence: ${(data.confidence * 100).toFixed(2)}%`,
+        });
+      }
+    } catch (error) {
+      console.error("Error detecting disease:", error);
+      setResult({ disease: "Error", action: "Failed to connect to the server or process image." });
+    } finally {
+      setIsAnalyzing(false);
+    }
   }
 
   return (
